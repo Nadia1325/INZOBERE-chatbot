@@ -1,0 +1,100 @@
+NLP ni iki?|NLP (Natural Language Processing) ni ubumenyi butuma mudasobwa zisoma, zumva kandi zikandika ururimi rw'abantu.
+NLP ivuga iki?|NLP ni impine ya Natural Language Processing.
+NLP imaze iki?|Ifasha mu gushakisha, chatbots, ubuhinduzi, gutahura spam no mu bafasha b'ijwi.
+Tanga ingero z'aho NLP ikoreshwa|Google Translate, Siri, gutahura spam, sentiment analysis na chatbots z'abakiriya.
+Corpus ni iki?|Corpus ni icyegeranyo kinini cy'inyandiko gikoreshwa mu kwigisha no gupima moderi.
+Dataset ni iki?|Ni icyegeranyo cy'amakuru gitunganyije, nk'ibitekerezo bifite label, gikoreshwa mu kubaka moderi.
+Nabona he dataset z'inyandiko?|Kaggle, Hugging Face Datasets na UCI Machine Learning Repository.
+Token ni iki?|Token ni agace gato k'inyandiko, akenshi ni ijambo cyangwa igice cyaryo.
+Tokenization ni iki?|Ni ugukata inyandiko mu tokens, nko guhindura interuro urutonde rw'amagambo.
+Stop word ni iki?|Ni ijambo risanzwe nka "the" cyangwa "is" ritagira icyo rihindura, kenshi rivanwaho.
+Stemming ni iki?|Ni ugukata ijambo ukarigeza ku mizi, nka "running" ikaba "run".
+Lemmatization ni iki?|Ni ugusubiza ijambo uko riri mu nkoranyamagambo, nka "better" ikaba "good". Iruta stemming.
+Stemming na lemmatization bitandukana bite?|Stemming irihuta ariko irakabije; lemmatization ikoresha inkoranyamagambo ikaguha amagambo nyayo.
+Kuki dukoresha inyuguti nto?|Kugira ngo "Good" na "good" bibarwe nk'ijambo rimwe.
+Kuki dukuraho utwuzuzo?|Utwuzuzo akenshi ni urusaku ku moderi zoroshye nka bag-of-words.
+Kuki dusukura inyandiko?|Inyandiko isukuye igabanya urusaku ikanafasha moderi kwiga vuba kandi neza.
+Intambwe zo gutunganya inyandiko ni izihe?|Inyuguti nto, gukuraho utwuzuzo, tokenization, gukuraho stop words, hanyuma stemming cyangwa lemmatization.
+Bag of words ni iki?|Ni uburyo bubara inshuro buri jambo ryagaragayemo, nta kwita ku murongo waryo.
+Vocabulary ni iki?|Ni urutonde rw'amagambo yihariye moderi izi.
+N-gram ni iki?|Ni urukurikirane rw'amagambo n, nka bigram (2) cyangwa trigram (3).
+TF-IDF ni iki?|Ni Term Frequency × Inverse Document Frequency; itanga amanota y'akamaro k'ijambo mu nyandiko.
+Term frequency ni iki?|Ni inshuro ijambo ryagaragayemo mu nyandiko.
+Inverse document frequency ni iki?|Ni igipimo kigabanya agaciro k'amagambo aboneka mu nyandiko nyinshi.
+Kuki dukoresha TF-IDF aho kubara gusa?|Igabanya agaciro k'amagambo asanzwe ikagaragaza ay'ingenzi.
+Cosine similarity ni iki?|Ni amanota kuva kuri 0 kugeza kuri 1 apima inguni iri hagati ya vectors ebyiri; uko ari hejuru, inyandiko zirasa cyane.
+Iyi chatbot ibona ite ibisubizo?|Ihindura ikibazo cyawe TF-IDF vector, igatanga igisubizo gifite cosine similarity iri hejuru.
+Vector ni iki?|Ni urutonde rw'imibare ruhagarariye inyandiko kugira ngo mudasobwa ibashe kuyigereranya.
+Word embedding ni iki?|Ni vector igaragaza ibisobanuro by'ijambo; amagambo asa afite vectors zisa.
+Word2Vec ni iki?|Ni moderi yiga embeddings ihanura ijambo hifashishijwe amagambo ari hafi yaryo.
+GloVe ni iki?|Ni uburyo bwa embeddings bushingiye ku mibare y'amagambo ajyana.
+Language model ni iki?|Ni moderi ihanura ijambo rikurikira mu murongo.
+Transformer ni iki?|Ni architecture ya neural network ikoresha attention; ni yo ishingiyeho BERT na GPT.
+Attention ni iki?|Ni uburyo butuma moderi yita ku magambo y'ingenzi mu nteruro.
+BERT ni iki?|Ni moderi ya Transformer yumva amagambo ikurikije ibiyakikije impande zombi.
+GPT ni iki?|Generative Pre-trained Transformer, moderi yandika inyandiko ijambo ku rindi.
+Hugging Face ni iki?|Ni urubuga rufite ibihumbi bya moderi zamaze kwigishwa, datasets n'isomero rya Transformers.
+NLTK ni iki?|Natural Language Toolkit, isomero rya Python ryo kwiga no gukora NLP y'ibanze.
+spaCy ni iki?|Ni isomero rya Python ryihuta rikoreshwa mu kazi nyakuri, rikora tokenization, POS tagging na NER.
+scikit-learn ni iki?|Ni isomero rya Python rya machine learning rifite TF-IDF, classifiers n'ibikoresho byo gupima.
+Sentiment analysis ni iki?|Ni ugutahura niba inyandiko yerekana amarangamutima meza, mabi cyangwa hagati.
+Sentiment analysis ikora ite?|Inyandiko irasukurwa, igahindurwa features nka TF-IDF, hanyuma classifier igahanura sentiment.
+Ni dataset ki ikwiye sentiment analysis?|IMDB movie reviews, Amazon reviews cyangwa tweets.
+Text classification ni iki?|Ni ugutanga icyiciro ku nyandiko, nka spam cyangwa atari spam.
+Spam detection ni iki?|Ni ugutandukanya ubutumwa bwa spam n'ubwiza (ham), akenshi hakoreshejwe TF-IDF na Naive Bayes.
+Naive Bayes ni iki?|Ni classifier yihuta ishingiye ku mahirwe, ikora neza ku nyandiko.
+Logistic regression ni iki?|Ni classifier yoroshye kandi ikomeye ihanura amahirwe y'icyiciro.
+SVM ni iki?|Support Vector Machine, classifier ishaka umupaka mwiza hagati y'ibyiciro.
+Deep learning ni iki?|Ni machine learning ikoresha neural networks zifite ibice byinshi.
+Supervised learning ni iki?|Ni kwiga hakoreshejwe ingero zifite labels.
+Unsupervised learning ni iki?|Ni ugushaka imiterere mu makuru nta labels, nka clustering.
+Feature ni iki?|Ni agaciro moderi ikoresha, nk'amanota ya TF-IDF y'ijambo.
+Training ni iki?|Ni ukureka moderi ikiga imiterere iri mu makuru.
+Training set ni iki?|Ni igice cy'amakuru cyigisha moderi, akenshi 80%.
+Test set ni iki?|Ni amakuru abikwa kugira ngo apime uko moderi ikora ku ngero nshya.
+Kuki dutandukanya train na test?|Kugira ngo dupime imikorere nyayo kandi tubone overfitting.
+Overfitting ni iki?|Ni igihe moderi ifata mu mutwe amakuru yigishijwe ikananirwa ku mashya.
+Underfitting ni iki?|Ni igihe moderi yoroheje cyane ntibashe kwiga imiterere y'amakuru.
+Accuracy ni iki?|Ni ijanisha ry'ibyahanuwe neza.
+Precision ni iki?|Muri byose byahanuwe ko ari byiza, ni ijanisha ry'ibyo koko ari byiza.
+Recall ni iki?|Muri byose koko ari byiza, ni ijanisha moderi yabonye.
+F1 score ni iki?|Ni ikigereranyo hagati ya precision na recall.
+Confusion matrix ni iki?|Ni imbonerahamwe yerekana ibyahanuwe neza n'ibitari byo muri buri cyiciro.
+Cross-validation ni iki?|Ni ugupima moderi ku bice bitandukanye by'amakuru kugira ngo amanota yizerwe.
+Imbalanced dataset ni iki?|Ni amakuru aho icyiciro kimwe kirenze ibindi cyane, nka 90% ham na 10% spam.
+Named entity recognition ni iki?|Ni ugushaka no gutanga labels ku mazina y'abantu, ahantu, ibigo n'amatariki mu nyandiko.
+NER ikoreshwa mu iki?|Mu gukura amakuru y'ingenzi mu makuru, CV, inyandiko z'ubuvuzi n'iz'amategeko.
+Ni ubuhe bwoko busanzwe bwa entity?|PERSON, ORG, GPE (ahantu), DATE, MONEY na PRODUCT.
+NER nyikora nte muri Python?|Fungura moderi ya spaCy nka en_core_web_sm ubone entities muri doc.ents.
+POS tagging ni iki?|Ni ugutanga label ku jambo ryose: izina, igikorwa, ijambo ry'imiterere n'ibindi.
+Dependency parsing ni iki?|Ni ugushaka isano y'ikibonezamvugo hagati y'amagambo mu nteruro.
+Machine translation ni iki?|Ni ugusemura inyandiko mu rundi rurimi mu buryo bwikora.
+Machine translation ikora ite?|Sisitemu z'ubu zikoresha moderi za transformer zigishijwe ku nteruro za miliyoni.
+Ni moderi izihe zihindura inyandiko?|MarianMT, T5, mBART na NLLB, zose ziboneka kuri Hugging Face.
+NLLB ni iki?|No Language Left Behind, moderi ya Meta ishyigikira indimi nyinshi zirimo Kinyarwanda.
+BLEU ni iki?|Ni amanota agereranya ubuhinduzi bwa mashini n'ubw'umuntu.
+Low-resource language ni iki?|Ni ururimi rufite inyandiko nke kuri murandasi, nka Kinyarwanda.
+NLP ishobora gukora ku Kinyarwanda?|Yego, hakoreshejwe datasets nka Mbaza na Masakhane, na moderi nka NLLB.
+Masakhane ni iki?|Ni umuryango w'abaturage wubaka NLP y'indimi z'Afurika.
+Chatbot ni iki?|Ni porogaramu ivugana n'abantu mu rurimi rwabo.
+Chatbots zifite ubwoko buhe?|Rule-based, retrieval-based (nk'iyi) na generative.
+Retrieval-based chatbot ni iki?|Ni iyo ishaka igisubizo cyiza cyabitswe aho kwandika gishya.
+FAQ chatbot ni iki?|Ni chatbot isubiza ibibazo bikunze kubazwa biri ku rutonde rwabitswe.
+Intent detection ni iki?|Ni ugutahura icyo umukoresha ashaka, nko "gufata itike".
+Fallback response ni iki?|Ni igisubizo cy'ineza gitangwa iyo bot itizeye igisubizo.
+Confidence threshold ni iki?|Ni amanota make cyane; iyo ari munsi, bot ivuga ko itabizi.
+Nakongera ute accuracy ya chatbot?|Ongeramo ibibazo bitandukanye, sukura inyandiko, hindura threshold, ukoreshe n-grams.
+Speech recognition ni iki?|Ni uguhindura amajwi inyandiko.
+Text-to-speech ni iki?|Ni uguhindura inyandiko ijwi.
+Data cleaning ni iki?|Ni ugukosora cyangwa gukuraho amakosa, ibisubirwamo, links n'ibimenyetso mu makuru.
+Pipeline ni iki?|Ni uruhererekane rw'intambwe, nko gusukura, vectorize, classify, zikorwa ku murongo.
+Transfer learning ni iki?|Ni ugukoresha moderi yamaze kwiga ukayihuza n'akazi kawe.
+Fine-tuning ni iki?|Ni ukongera kwigisha moderi yamaze kwiga ukoresheje amakuru yawe.
+Bias muri NLP ni iki?|Ni imyitwarire itari iy'ubutabera moderi ivana mu makuru atameze neza.
+Text summarization ni iki?|Ni ugufata inyandiko ukayigabanya usigaje ibitekerezo by'ingenzi.
+Topic modeling ni iki?|Ni ugushakisha insanganyamatsiko zihishe mu nyandiko, nka LDA.
+Umushinga mwiza wa NLP ugizwe n'iki?|Hitamo umurimo, shaka dataset, sukura, ubake, upime, ubisobanure.
+Nashyira nte umushinga wa NLP?|Erekana dataset, pipeline, logic ya buri ntambwe n'ibyavuyemo mu minota 5 kugeza kuri 7.
+Navuga iki ku byavuyemo?|Vuga accuracy, precision, recall, F1 n'ingero imwe cyangwa ebyiri, harimo n'ikosa.
+Uyu mushinga ukoresha ibihe bikoresho?|TF-IDF na cosine similarity, gutunganya inyandiko nka NLTK, n'urubuga rwa web.
+Inzobere yubatswe na nde?|Inzobere yubatswe nk'umushinga w'isomo rya NLP usubiza ibibazo bikunze kubazwa kuri NLP.

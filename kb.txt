@@ -1,0 +1,100 @@
+What is NLP?|Natural Language Processing lets computers read, understand and generate human language.
+What does NLP stand for?|Natural Language Processing.
+Why is NLP useful?|It powers search, chatbots, translation, spam filters and voice assistants.
+Give examples of NLP applications|Google Translate, Siri, spam detection, sentiment analysis, autocomplete and customer-support chatbots.
+What is a corpus?|A large collection of text used to train or test language models.
+What is a dataset?|A structured collection of examples, such as reviews with labels, used to build a model.
+Where can I find text datasets?|Kaggle, Hugging Face Datasets and the UCI Machine Learning Repository.
+What is a token?|A small unit of text, usually a word or part of a word.
+What is tokenization?|Splitting text into tokens, for example turning a sentence into a list of words.
+What is a stop word?|A very common word like "the" or "is" that adds little meaning and is often removed.
+What is stemming?|Cutting words to a crude root, e.g. "running" becomes "run" or "runn".
+What is lemmatization?|Reducing a word to its dictionary form, e.g. "better" becomes "good". It is more accurate than stemming.
+Stemming vs lemmatization?|Stemming is fast but rough; lemmatization uses a dictionary and gives real words.
+Why lowercase text?|So "Good" and "good" count as the same word.
+Why remove punctuation?|Punctuation usually adds noise for simple models like bag-of-words.
+Why clean text?|Clean text reduces noise, shrinks vocabulary and helps models learn faster and better.
+What are the steps of text preprocessing?|Lowercase, remove punctuation and noise, tokenize, remove stop words, then stem or lemmatize.
+What is bag of words?|A representation that counts how often each word appears, ignoring word order.
+What is a vocabulary?|The set of unique words known to the model.
+What is an n-gram?|A sequence of n consecutive words, such as a bigram (2 words) or trigram (3 words).
+What is TF-IDF?|Term Frequency times Inverse Document Frequency; it scores words by how important they are in a document.
+What is term frequency?|How many times a word appears in a document.
+What is inverse document frequency?|A measure that lowers the weight of words appearing in many documents.
+Why use TF-IDF instead of counts?|It reduces the weight of common words and highlights distinctive ones.
+What is cosine similarity?|A score from 0 to 1 measuring the angle between two vectors; higher means more similar text.
+How does this chatbot find answers?|It converts your question to a TF-IDF vector and returns the answer with the highest cosine similarity.
+What is a vector?|A list of numbers that represents text so a computer can compare it.
+What is a word embedding?|A dense vector that captures a word's meaning, so similar words have similar vectors.
+What is Word2Vec?|A model that learns word embeddings by predicting words from their neighbours.
+What is GloVe?|Global Vectors, an embedding method built from word co-occurrence statistics.
+What is a language model?|A model that predicts the next word in a sequence.
+What is a transformer?|A neural network architecture using attention; it powers BERT and GPT.
+What is attention?|A mechanism that lets a model focus on the most relevant words in a sentence.
+What is BERT?|Bidirectional Encoder Representations from Transformers, a model that understands context from both directions.
+What is GPT?|Generative Pre-trained Transformer, a model that generates text one token at a time.
+What is Hugging Face?|A platform with thousands of pretrained models, datasets and the Transformers library.
+What is NLTK?|Natural Language Toolkit, a Python library for teaching and doing classic NLP.
+What is spaCy?|A fast Python library for production NLP, including tokenization, POS tagging and NER.
+What is scikit-learn?|A Python machine learning library with TF-IDF, classifiers and evaluation tools.
+What is sentiment analysis?|Detecting whether text is positive, negative or neutral.
+How does sentiment analysis work?|Text is cleaned, turned into features like TF-IDF, and a classifier predicts the sentiment label.
+Which dataset suits sentiment analysis?|IMDB movie reviews, Amazon reviews or tweets datasets.
+What is text classification?|Assigning a category label to text, such as spam or not spam.
+What is spam detection?|Classifying messages as spam or ham (legitimate), often using TF-IDF and Naive Bayes.
+What is Naive Bayes?|A fast probability-based classifier that works well on text.
+What is logistic regression?|A simple, strong classifier that predicts the probability of a class.
+What is an SVM?|Support Vector Machine, a classifier that finds the best boundary between classes.
+What is deep learning?|Machine learning with many-layered neural networks.
+What is supervised learning?|Learning from labeled examples.
+What is unsupervised learning?|Finding patterns in data without labels, such as clustering.
+What is a feature?|An input value the model uses, such as a word's TF-IDF score.
+What is training?|Letting a model learn patterns from data.
+What is a training set?|The portion of data used to teach the model, usually about 80 percent.
+What is a test set?|Data kept aside to check how well the model works on unseen examples.
+Why split data into train and test?|To measure real performance and detect overfitting.
+What is overfitting?|When a model memorizes training data and performs poorly on new data.
+What is underfitting?|When a model is too simple to learn the patterns in the data.
+What is accuracy?|The percentage of predictions that are correct.
+What is precision?|Of everything predicted positive, the share that really is positive.
+What is recall?|Of all real positives, the share the model found.
+What is the F1 score?|The balance (harmonic mean) of precision and recall.
+What is a confusion matrix?|A table showing correct and wrong predictions for each class.
+What is cross-validation?|Testing a model on several different data splits for a more reliable score.
+What is an imbalanced dataset?|Data where one class is much bigger than others, like 90 percent ham and 10 percent spam.
+What is named entity recognition?|Finding and labeling names of people, places, organizations and dates in text.
+What is NER used for?|Extracting key information from news, resumes, medical notes and legal documents.
+What are common entity types?|PERSON, ORG, GPE (places), DATE, MONEY and PRODUCT.
+How do I do NER in Python?|Load a spaCy model like en_core_web_sm and read the entities from doc.ents.
+What is POS tagging?|Labeling each word as a noun, verb, adjective and so on.
+What is dependency parsing?|Finding grammatical relations between words in a sentence.
+What is machine translation?|Automatically translating text from one language to another.
+How does machine translation work?|Modern systems use transformer models trained on millions of sentence pairs.
+Which models translate text?|MarianMT, T5, mBART and NLLB, all available on Hugging Face.
+What is NLLB?|No Language Left Behind, a Meta model that supports many low-resource languages including Kinyarwanda.
+What is BLEU?|A score that compares machine translation with human translation.
+What is a low-resource language?|A language with little digital text data, like Kinyarwanda.
+Can NLP work for Kinyarwanda?|Yes, using datasets such as Mbaza and Masakhane, and multilingual models like NLLB.
+What is Masakhane?|A grassroots community building NLP for African languages.
+What is a chatbot?|A program that talks with users in natural language.
+What types of chatbots exist?|Rule-based, retrieval-based (like this one) and generative chatbots.
+What is a retrieval-based chatbot?|One that finds the best stored answer instead of writing a new one.
+What is an FAQ chatbot?|A chatbot that answers frequently asked questions from a stored list.
+What is intent detection?|Working out what the user wants, such as "book a ticket".
+What is a fallback response?|A polite reply when the bot is not confident about an answer.
+What is a confidence threshold?|A minimum similarity score below which the bot says it does not know.
+How can I improve chatbot accuracy?|Add more question variants, clean the text, tune the threshold and use n-grams.
+What is speech recognition?|Converting spoken audio into text.
+What is text-to-speech?|Converting written text into spoken audio.
+What is data cleaning?|Fixing or removing errors, duplicates, links and symbols from raw data.
+What is a pipeline?|A chain of steps, such as clean, vectorize and classify, run in order.
+What is transfer learning?|Reusing a pretrained model and adapting it to your task.
+What is fine-tuning?|Training a pretrained model a little more on your own data.
+What is bias in NLP?|Unfair behavior learned from skewed training data.
+What is text summarization?|Shortening a text while keeping its main ideas.
+What is topic modeling?|Discovering hidden themes in documents, e.g. with LDA.
+What is a good NLP project structure?|Pick a task, find a dataset, clean, build, evaluate, then explain results.
+How do I present my NLP project?|Show the dataset, the pipeline, the logic of each step and the final results in 5 to 7 minutes.
+What should I say about results?|Report accuracy, precision, recall, F1 and one or two example predictions, including a mistake.
+What tools does this project use?|TF-IDF and cosine similarity from scikit-learn ideas, NLTK-style preprocessing, and a web interface.
+Who built Inzobere?|Inzobere was built as an NLP course project to answer frequently asked questions about NLP.
