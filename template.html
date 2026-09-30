@@ -62,7 +62,7 @@ function add(cls,txt){const d=document.createElement("div");d.className="m "+cls
 function chips(el,list){const c=document.createElement("div");c.className="chips";list.forEach(q=>{const b=document.createElement("button");b.className="chip";b.textContent=q;b.onclick=()=>send(q);c.appendChild(b)});el.appendChild(c)}
 function typing(){const d=add("b","");d.innerHTML='<span class="dots"><i></i><i></i><i></i></span>';return d}
 function type(d,txt,done){d.textContent="";let i=0;const st=Math.max(1,Math.ceil(txt.length/80));const iv=setInterval(()=>{i+=st;d.textContent=txt.slice(0,i);chat.scrollTop=chat.scrollHeight;if(i>=txt.length){clearInterval(iv);done&&done()}},20)}
-function reply(txt,idx,modelInfo,suggestions){const d=typing();setTimeout(()=>{if(idx!=null){const target=L==="rw"?(idx<H?idx+H:idx):(idx>=H?idx-H:idx);if(target!==idx){idx=target;txt=KB[idx].a}if(suggestions)suggestions=suggestions.map(q=>{const match=KB.findIndex(k=>k.q===q);return match<0?q:KB[L==="rw"?(match<H?match+H:match):(match>=H?match-H:match)].q})}type(d,txt,()=>{if(idx==null)return;const T=UI[L],p=(idx+H)%(2*H),m=document.createElement("div");m.className="meta";
+function reply(txt,idx,modelInfo,suggestions,notice){const d=typing();setTimeout(()=>{if(idx!=null){const target=L==="rw"?(idx<H?idx+H:idx):(idx>=H?idx-H:idx);if(target!==idx){idx=target;txt=KB[idx].a}if(suggestions)suggestions=suggestions.map(q=>{const match=KB.findIndex(k=>k.q===q);return match<0?q:KB[L==="rw"?(match<H?match+H:match):(match>=H?match-H:match)].q})}type(d,txt,()=>{if(notice){const status=document.createElement("div");status.className="note";status.textContent=notice;d.appendChild(status)}if(idx==null)return;const T=UI[L],p=(idx+H)%(2*H),m=document.createElement("div");m.className="meta";
  const b1=document.createElement("button");b1.className="mini";b1.textContent="🌍 "+(KB[p].l==="rw"?"Kinyarwanda":"English");b1.onclick=()=>reply(KB[p].a,p);
  const b2=document.createElement("button");b2.className="mini";b2.textContent="🔊 "+T.say;b2.onclick=()=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(KB[idx].a);u.lang=KB[idx].l==="rw"?"rw-RW":"en-US";speechSynthesis.speak(u)};
  const g=document.createElement("span");g.className="tag";g.textContent=(modelInfo?modelInfo+" · ":"")+T.more;m.append(b1,b2,g);d.appendChild(m);if(suggestions&&suggestions.length)chips(d,suggestions);chat.scrollTop=chat.scrollHeight})},550)}
@@ -86,8 +86,9 @@ async function send(text){text=(text||$("q").value).trim();if(!text)return;$("q"
    return reply(KB[top.index].a,top.index,label,suggestions);
   }catch(error){
    const fallback=ask(text,false)[0];
-   waiting.textContent=`GloVe search unavailable (${error.message||"unknown error"}); using browser TF-IDF fallback. Start with py run.py and check the model cache, dependencies, and internet connection.`;
-   return reply(KB[fallback.i].a,fallback.i,"TF-IDF fallback · GloVe unavailable");
+   waiting.remove();
+   const notice=`GloVe search unavailable (${error.message||"unknown error"}); this answer used the browser TF-IDF fallback. Start with py run.py and check the model cache, dependencies, and internet connection.`;
+   return reply(KB[fallback.i].a,fallback.i,"TF-IDF fallback · GloVe unavailable",null,notice);
   }
  }
  const r=ask(text,true),top=r[0];
