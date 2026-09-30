@@ -25,8 +25,10 @@ input{flex:1;font:inherit;background:transparent;border:0;outline:0;color:var(--
 .go{background:var(--pri);color:#fff;border:0}.rec{background:#dc2626;color:#fff;border-color:#dc2626}
 .dots i{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--mut);animation:bn 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}@keyframes bn{50%{opacity:.2;transform:translateY(-3px)}}
 .note{font-size:11px;color:var(--mut);text-align:center;margin-top:6px}
+@media(max-width:560px){header{flex-wrap:wrap}header .sp{display:none}#ranker{flex:1;min-width:170px}#lang{flex:1}}
 </style></head><body><div class="app">
 <header><div class="logo">I</div><div><h1>Inzobere</h1><small id="sub"></small></div><div class="sp"></div>
+<select id="ranker" aria-label="Search model"><option value="hybrid">Hybrid: TF-IDF + GloVe</option><option value="tfidf">TF-IDF baseline</option></select>
 <select id="lang"><option value="en">English</option><option value="rw">Kinyarwanda</option></select>
 <button id="clr"></button></header>
 <div id="chat"></div>
@@ -36,8 +38,8 @@ input{flex:1;font:inherit;background:transparent;border:0;outline:0;color:var(--
 const KB_RAW=`/*KB*/`;
 const parse=r=>r.trim().split("\n").map(l=>{const i=l.indexOf("|");return{q:l.slice(0,i),a:l.slice(i+1)}});
 const KB=parse(KB_RAW).map(k=>({...k,l:"en"})).concat(parse(`/*KBRW*/`).map(k=>({...k,l:"rw"})));const H=KB.length/2;
-const UI={en:{sub:"NLP FAQ Assistant · TF-IDF + cosine similarity",ph:"Ask anything about NLP…",send:"Send",clr:"Clear",hi:"Hello! I'm Inzobere. Ask me about NLP: tokenization, TF-IDF, sentiment, NER, translation and more. You can type or use the microphone.",none:"I'm sorry, that question is outside what I know. 💙 I only answer questions about Natural Language Processing (NLP), and I don't want to give you a wrong answer.\n\nCan I help you with something about NLP instead? For example, ask me what TF-IDF is, or how sentiment analysis works.",near:"I'm not completely sure I understood you. Could you please rephrase your question? I'll gladly try again.",more:"Is there anything else I can help you with? 😊",thx:"You're very welcome! 💙 Is there anything else you would like to ask?",hey:"Hello! 😊 How can I help you today? Ask me anything about NLP.",conf:"Match",tr:"Translate",say:"Listen",foot:"Voice: Chrome · Answers are retrieved from a hidden knowledge base",st:["What is TF-IDF?","What is tokenization?","How does sentiment analysis work?","What is named entity recognition?","Can NLP work for Kinyarwanda?"],nov:"Voice input needs Google Chrome."},
-rw:{sub:"Umufasha wa NLP · TF-IDF + cosine similarity",ph:"Baza ikibazo cyose kuri NLP…",send:"Ohereza",clr:"Siba",hi:"Muraho! Ndi Inzobere. Mumbaze kuri NLP: tokenization, TF-IDF, sentiment, NER, ubuhinduzi n'ibindi. Mushobora kwandika cyangwa gukoresha mikoro.",none:"Mbabarira, icyo kibazo kiri hanze y'ibyo nzi. 💙 Mfasha gusa ku bibazo bya NLP, kandi sinshaka kuguha igisubizo kitari cyo.\n\nHari ikindi kuri NLP nagufashamo? Urugero: mbaza TF-IDF ni iki, cyangwa sentiment analysis ikora ite.",near:"Ntabwo ndabyumva neza. Ongera ubaze ukoresheje andi magambo, nzishimira kugerageza.",more:"Hari ikindi nagufashamo? 😊",thx:"Nta kibazo! 💙 Hari ikindi wifuza kumbaza?",hey:"Muraho! 😊 Nagufasha iki uyu munsi? Mbaza icyo ushaka cyose kuri NLP.",conf:"Guhura",tr:"Hindura",say:"Umva",foot:"Ijwi: Chrome · Ibisubizo bikurwa mu bubiko bwihishe",st:["What is TF-IDF?","What is tokenization?","How does sentiment analysis work?","What is named entity recognition?","Can NLP work for Kinyarwanda?"],nov:"Ijwi rikoresha Google Chrome."}};
+const UI={en:{sub:"NLP FAQ · GloVe embeddings + TF-IDF",ph:"Ask anything about NLP…",send:"Send",clr:"Clear",hi:"Hello! I'm Inzobere. Ask me about NLP: tokenization, TF-IDF, sentiment, NER, translation and more. You can type or use the microphone.",none:"I'm sorry, that question is outside what I know. 💙 I only answer questions about Natural Language Processing (NLP), and I don't want to give you a wrong answer.\n\nCan I help you with something about NLP instead? For example, ask me what TF-IDF is, or how sentiment analysis works.",near:"I'm not completely sure I understood you. Could you please rephrase your question? I'll gladly try again.",more:"Is there anything else I can help you with? 😊",thx:"You're very welcome! 💙 Is there anything else you would like to ask?",hey:"Hello! 😊 How can I help you today? Ask me anything about NLP.",conf:"Match",tr:"Translate",say:"Listen",foot:"English: compare TF-IDF with GloVe hybrid. GloVe downloads on first use; Kinyarwanda keeps the existing TF-IDF pipeline.",st:["What is TF-IDF?","What is tokenization?","How does sentiment analysis work?","What is named entity recognition?","Can NLP work for Kinyarwanda?"],nov:"Voice input needs Google Chrome."},
+rw:{sub:"NLP · GloVe ku Cyongereza, TF-IDF ku Kinyarwanda",ph:"Baza ikibazo cyose kuri NLP…",send:"Ohereza",clr:"Siba",hi:"Muraho! Ndi Inzobere. Mumbaze kuri NLP: tokenization, TF-IDF, sentiment, NER, ubuhinduzi n'ibindi. Mushobora kwandika cyangwa gukoresha mikoro.",none:"Mbabarira, icyo kibazo kiri hanze y'ibyo nzi. 💙 Mfasha gusa ku bibazo bya NLP, kandi sinshaka kuguha igisubizo kitari cyo.\n\nHari ikindi kuri NLP nagufashamo? Urugero: mbaza TF-IDF ni iki, cyangwa sentiment analysis ikora ite.",near:"Ntabwo ndabyumva neza. Ongera ubaze ukoresheje andi magambo, nzishimira kugerageza.",more:"Hari ikindi nagufashamo? 😊",thx:"Nta kibazo! 💙 Hari ikindi wifuza kumbaza?",hey:"Muraho! 😊 Nagufasha iki uyu munsi? Mbaza icyo ushaka cyose kuri NLP.",conf:"Guhura",tr:"Hindura",say:"Umva",foot:"Kinyarwanda ikoresha TF-IDF; GloVe yo muri uyu mushinga ikoresha Icyongereza.",st:["What is TF-IDF?","What is tokenization?","How does sentiment analysis work?","What is named entity recognition?","Can NLP work for Kinyarwanda?"],nov:"Ijwi rikoresha Google Chrome."}};
 // Kinyarwanda -> English keyword glossary (lets you ask in Kinyarwanda)
 const GL={iki:"what",ni:"is",ikihe:"what",nte:"how",gute:"how",uko:"how",kuki:"why",ninde:"who",aho:"where",gukora:"work",ikora:"work",bukora:"work",bukoresha:"work",nsobanurira:"explain",sobanura:"explain",gusobanura:"explain",ururimi:"language",indimi:"language",amagambo:"words",ijambo:"word",inyandiko:"text",amakuru:"data",imashini:"machine",kwiga:"learning",ubwenge:"intelligence",ubuhinduzi:"translation",guhindura:"translate",amarangamutima:"sentiment",isesengura:"analysis",ikiganiro:"chatbot",gukoresha:"use",ibisubizo:"answers",ibibazo:"questions",ikibazo:"question",kinyarwanda:"kinyarwanda",amazina:"named entity",umubare:"number",icyitegererezo:"model",imyitozo:"training",ikizamini:"test",ukuri:"accuracy",ijwi:"speech",kumenya:"recognition",gutandukanya:"classification",inkuru:"text",gusukura:"cleaning",ibisobanuro:"meaning",imbonerahamwe:"table"};
 const SW=new Set("a an the is are was of to in on for and or it this that be by with as at from can do does how what why who i you me my your please tell about explain define describe meaning mean ni iki ikihe ese mu na ku cya bya wa ya za ba kuri ngo cyangwa kandi hari se".split(" "));
@@ -60,20 +62,41 @@ function add(cls,txt){const d=document.createElement("div");d.className="m "+cls
 function chips(el,list){const c=document.createElement("div");c.className="chips";list.forEach(q=>{const b=document.createElement("button");b.className="chip";b.textContent=q;b.onclick=()=>send(q);c.appendChild(b)});el.appendChild(c)}
 function typing(){const d=add("b","");d.innerHTML='<span class="dots"><i></i><i></i><i></i></span>';return d}
 function type(d,txt,done){d.textContent="";let i=0;const st=Math.max(1,Math.ceil(txt.length/80));const iv=setInterval(()=>{i+=st;d.textContent=txt.slice(0,i);chat.scrollTop=chat.scrollHeight;if(i>=txt.length){clearInterval(iv);done&&done()}},20)}
-function reply(txt,idx){const d=typing();setTimeout(()=>type(d,txt,()=>{if(idx==null)return;const T=UI[L],p=(idx+H)%(2*H),m=document.createElement("div");m.className="meta";
+function reply(txt,idx,modelInfo,suggestions){const d=typing();setTimeout(()=>{if(idx!=null){const target=L==="rw"?(idx<H?idx+H:idx):(idx>=H?idx-H:idx);if(target!==idx){idx=target;txt=KB[idx].a}if(suggestions)suggestions=suggestions.map(q=>{const match=KB.findIndex(k=>k.q===q);return match<0?q:KB[L==="rw"?(match<H?match+H:match):(match>=H?match-H:match)].q})}type(d,txt,()=>{if(idx==null)return;const T=UI[L],p=(idx+H)%(2*H),m=document.createElement("div");m.className="meta";
  const b1=document.createElement("button");b1.className="mini";b1.textContent="🌍 "+(KB[p].l==="rw"?"Kinyarwanda":"English");b1.onclick=()=>reply(KB[p].a,p);
  const b2=document.createElement("button");b2.className="mini";b2.textContent="🔊 "+T.say;b2.onclick=()=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(KB[idx].a);u.lang=KB[idx].l==="rw"?"rw-RW":"en-US";speechSynthesis.speak(u)};
- const g=document.createElement("span");g.className="tag";g.textContent=T.more;m.append(b1,b2,g);d.appendChild(m);chat.scrollTop=chat.scrollHeight}),550)}
-function send(text){text=(text||$("q").value).trim();if(!text)return;$("q").value="";add("u",text);
- const r=ask(text,false),top=r[0],T=UI[L],lw=text.toLowerCase(),n=text.split(/\s+/).length;
+ const g=document.createElement("span");g.className="tag";g.textContent=(modelInfo?modelInfo+" · ":"")+T.more;m.append(b1,b2,g);d.appendChild(m);if(suggestions&&suggestions.length)chips(d,suggestions);chat.scrollTop=chat.scrollHeight})},550)}
+async function send(text){text=(text||$("q").value).trim();if(!text)return;$("q").value="";add("u",text);
+ const T=UI[L],lw=text.toLowerCase(),n=text.split(/\s+/).length;
  if(/^(hi|hello|hey|good (morning|afternoon|evening)|muraho|mwiriwe|bite|amakuru|mwaramutse)\b/.test(lw)&&n<5)return reply(T.hey);
  if(/\b(thanks?|thank you|murakoze|urakoze|ndagushimira)\b/.test(lw)&&n<6)return reply(T.thx);
+ if(L==="en"){
+  const mode=$("ranker").value,waiting=typing();
+  try{
+   const response=await fetch("/api/search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:text,mode})});
+   const payload=await response.json();if(!response.ok)throw new Error(payload.detail||payload.error||"Search failed");
+   const top=payload.results[0];waiting.remove();
+   if(!top)return reply(T.none);
+   if(mode==="tfidf"&&top.score<0.10)return reply(T.none);
+   if(mode==="tfidf"&&top.score<0.18)return reply(T.near);
+   if(mode==="hybrid"&&top.tfidf<0.05&&top.embedding<0.25)return reply(T.none);
+   if(mode==="hybrid"&&top.tfidf<0.08&&top.embedding<0.35)return reply(T.near);
+   const label=mode==="hybrid"?`Hybrid 50/50 · TF-IDF ${top.tfidf.toFixed(2)} · GloVe ${top.embedding.toFixed(2)}`:`TF-IDF · ${top.score.toFixed(2)}`;
+   const suggestions=payload.results.slice(1).map(result=>result.question);
+   return reply(KB[top.index].a,top.index,label,suggestions);
+  }catch(error){
+   const fallback=ask(text,false)[0];
+   waiting.textContent=`GloVe search unavailable (${error.message||"unknown error"}); using browser TF-IDF fallback. Start with py run.py and check the model cache, dependencies, and internet connection.`;
+   return reply(KB[fallback.i].a,fallback.i,"TF-IDF fallback · GloVe unavailable");
+  }
+ }
+ const r=ask(text,true),top=r[0];
  if(top.s<0.10)return reply(T.none);
  if(top.s<0.18)return reply(T.near);
- reply(KB[top.i].a,top.i)}
+ reply(KB[top.i].a,top.i,$("ranker").value==="hybrid"?"TF-IDF fallback · Kinyarwanda":"TF-IDF baseline")}
 function setL(l){L=l;const T=UI[l];$("sub").textContent=T.sub;$("q").placeholder=T.ph;$("send").textContent=T.send;$("clr").textContent=T.clr;$("foot").textContent=T.foot}
 function start(){chat.innerHTML="";add("b",UI[L].hi)}
-$("lang").onchange=e=>{setL(e.target.value);start()};$("clr").onclick=start;$("send").onclick=()=>send();
+$("lang").onchange=e=>setL(e.target.value);$("clr").onclick=start;$("send").onclick=()=>send();
 $("q").onkeydown=e=>{if(e.key==="Enter")send()};
 $("mic").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return alert(UI[L].nov);
  if(rec){rec.stop();return}rec=new SR();rec.lang=L==="rw"?"rw-RW":"en-US";

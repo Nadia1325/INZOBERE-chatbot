@@ -1,0 +1,502 @@
+[
+ {
+  "category": "Basics",
+  "question": "What is NLP?",
+  "answer": "NLP (Natural Language Processing) teaches computers to read, understand and write human language."
+ },
+ {
+  "category": "Basics",
+  "question": "Why is NLP useful?",
+  "answer": "It powers chatbots, search, spam filters, translators and voice assistants."
+ },
+ {
+  "category": "Basics",
+  "question": "What is a corpus?",
+  "answer": "A corpus is a big collection of text used to train or test a model."
+ },
+ {
+  "category": "Basics",
+  "question": "What is a token?",
+  "answer": "A token is a small piece of text, usually a word or part of a word."
+ },
+ {
+  "category": "Basics",
+  "question": "What is tokenization?",
+  "answer": "Tokenization splits a sentence into tokens, for example \"I love NLP\" becomes I, love, NLP."
+ },
+ {
+  "category": "Basics",
+  "question": "What is a document in NLP?",
+  "answer": "A document is one piece of text, like a review, a tweet or an SMS."
+ },
+ {
+  "category": "Basics",
+  "question": "What is vocabulary?",
+  "answer": "Vocabulary is the list of all unique words found in your dataset."
+ },
+ {
+  "category": "Basics",
+  "question": "What is a dataset?",
+  "answer": "A dataset is the collection of examples we use to build and check a model."
+ },
+ {
+  "category": "Basics",
+  "question": "What is a model?",
+  "answer": "A model is a program that learned patterns from data and can make predictions."
+ },
+ {
+  "category": "Basics",
+  "question": "What is machine learning?",
+  "answer": "Machine learning lets computers learn patterns from examples instead of fixed rules."
+ },
+ {
+  "category": "Cleaning",
+  "question": "Why do we clean text?",
+  "answer": "Clean text removes noise, so the model focuses on the words that matter."
+ },
+ {
+  "category": "Cleaning",
+  "question": "What is lowercasing?",
+  "answer": "It changes all letters to small letters so \"Good\" and \"good\" are the same word."
+ },
+ {
+  "category": "Cleaning",
+  "question": "What are stopwords?",
+  "answer": "Stopwords are very common words like \"the\", \"is\" and \"a\" that carry little meaning."
+ },
+ {
+  "category": "Cleaning",
+  "question": "Why remove stopwords?",
+  "answer": "Removing them keeps the important words and makes the model faster."
+ },
+ {
+  "category": "Cleaning",
+  "question": "What is stemming?",
+  "answer": "Stemming cuts words to a rough root, like \"running\" to \"run\"."
+ },
+ {
+  "category": "Cleaning",
+  "question": "What is lemmatization?",
+  "answer": "Lemmatization changes a word to its real dictionary form, like \"better\" to \"good\"."
+ },
+ {
+  "category": "Cleaning",
+  "question": "Stemming or lemmatization, which is better?",
+  "answer": "Lemmatization is more accurate, but stemming is faster and simpler."
+ },
+ {
+  "category": "Cleaning",
+  "question": "Why remove punctuation?",
+  "answer": "Punctuation usually adds noise in simple models, so we remove it."
+ },
+ {
+  "category": "Cleaning",
+  "question": "What is text normalization?",
+  "answer": "It means making text consistent: lowercase, no extra spaces, no strange symbols."
+ },
+ {
+  "category": "Cleaning",
+  "question": "What is a regular expression?",
+  "answer": "A regular expression (regex) is a pattern used to find or replace text."
+ },
+ {
+  "category": "Features",
+  "question": "What is Bag of Words?",
+  "answer": "Bag of Words counts how many times each word appears, ignoring word order."
+ },
+ {
+  "category": "Features",
+  "question": "What is TF?",
+  "answer": "TF (term frequency) is how often a word appears in one document."
+ },
+ {
+  "category": "Features",
+  "question": "What is IDF?",
+  "answer": "IDF (inverse document frequency) gives a higher score to rare words across all documents."
+ },
+ {
+  "category": "Features",
+  "question": "What is TF-IDF?",
+  "answer": "TF-IDF multiplies TF by IDF, so important and rare words get bigger scores."
+ },
+ {
+  "category": "Features",
+  "question": "Why is TF-IDF better than simple counts?",
+  "answer": "It reduces the weight of common words and highlights the special words."
+ },
+ {
+  "category": "Features",
+  "question": "What is a vector?",
+  "answer": "A vector is a list of numbers that represents a text."
+ },
+ {
+  "category": "Features",
+  "question": "What is cosine similarity?",
+  "answer": "Cosine similarity measures how close two vectors are, from 0 (different) to 1 (same)."
+ },
+ {
+  "category": "Features",
+  "question": "What is an n-gram?",
+  "answer": "An n-gram is a group of n words in a row, like \"machine learning\" (2-gram)."
+ },
+ {
+  "category": "Features",
+  "question": "What is a word embedding?",
+  "answer": "An embedding is a smart vector where words with similar meaning are close together."
+ },
+ {
+  "category": "Features",
+  "question": "What is Word2Vec?",
+  "answer": "Word2Vec is a method that learns word embeddings from large text."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is a chatbot?",
+  "answer": "A chatbot is a program that talks with people using text or voice."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is an FAQ chatbot?",
+  "answer": "It answers common questions by finding the closest stored question and returning its answer."
+ },
+ {
+  "category": "Chatbot",
+  "question": "How does this chatbot work?",
+  "answer": "It turns your question into TF-IDF numbers and finds the most similar stored question."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What are the steps of this chatbot?",
+  "answer": "Clean the text, apply TF-IDF, compare with cosine similarity, then return the best answer."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is a similarity score?",
+  "answer": "It is a number showing how well your question matches a stored question."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is a confidence threshold?",
+  "answer": "It is the minimum score needed to answer, so the bot does not guess when unsure."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What happens when the bot is not sure?",
+  "answer": "It says it did not understand and suggests similar questions."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is a rule-based chatbot?",
+  "answer": "It follows fixed rules written by a person, like if-then statements."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is an AI chatbot?",
+  "answer": "It uses machine learning to understand questions instead of only fixed rules."
+ },
+ {
+  "category": "Chatbot",
+  "question": "What is a retrieval chatbot?",
+  "answer": "A retrieval chatbot picks an answer from a ready list instead of writing a new one."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is sentiment analysis?",
+  "answer": "It finds whether a text is positive, negative or neutral."
+ },
+ {
+  "category": "Sentiment",
+  "question": "Where is sentiment analysis used?",
+  "answer": "Companies use it on reviews, tweets and feedback to see how people feel."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What are the sentiment labels?",
+  "answer": "Usually positive, negative and neutral."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is a lexicon?",
+  "answer": "A lexicon is a dictionary of words with scores, like \"good\" is positive."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is VADER?",
+  "answer": "VADER is a ready NLTK tool that scores the sentiment of short social media text."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is polarity?",
+  "answer": "Polarity is the sentiment score, from -1 (very negative) to +1 (very positive)."
+ },
+ {
+  "category": "Sentiment",
+  "question": "Why is sarcasm hard?",
+  "answer": "Sarcasm says the opposite of what it means, so simple models get confused."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is a movie review dataset?",
+  "answer": "It is a set of reviews labeled positive or negative, often used to train sentiment models."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is negation?",
+  "answer": "Negation words like \"not\" flip the meaning, for example \"not good\"."
+ },
+ {
+  "category": "Sentiment",
+  "question": "What is emotion detection?",
+  "answer": "It finds feelings like joy, anger or sadness, not just positive or negative."
+ },
+ {
+  "category": "Classification",
+  "question": "What is text classification?",
+  "answer": "It puts a text into a group, like spam or not spam."
+ },
+ {
+  "category": "Classification",
+  "question": "What is spam detection?",
+  "answer": "It is a classification task that finds unwanted messages such as spam SMS."
+ },
+ {
+  "category": "Classification",
+  "question": "What is a label?",
+  "answer": "A label is the correct answer for an example, like \"spam\"."
+ },
+ {
+  "category": "Classification",
+  "question": "What is supervised learning?",
+  "answer": "The model learns from examples that already have labels."
+ },
+ {
+  "category": "Classification",
+  "question": "What is Naive Bayes?",
+  "answer": "A fast, simple classifier that uses word probabilities. It works well for text."
+ },
+ {
+  "category": "Classification",
+  "question": "What is Logistic Regression?",
+  "answer": "A simple, strong classifier that gives a probability for each class."
+ },
+ {
+  "category": "Classification",
+  "question": "What is SVM?",
+  "answer": "SVM (Support Vector Machine) finds the best line that separates classes."
+ },
+ {
+  "category": "Classification",
+  "question": "What is a train-test split?",
+  "answer": "We split data into training (to learn) and testing (to check) parts."
+ },
+ {
+  "category": "Classification",
+  "question": "What is overfitting?",
+  "answer": "Overfitting means the model memorized the training data and fails on new data."
+ },
+ {
+  "category": "Classification",
+  "question": "What is a pipeline?",
+  "answer": "A pipeline chains steps, like cleaning, TF-IDF and the model, into one flow."
+ },
+ {
+  "category": "NER",
+  "question": "What is Named Entity Recognition?",
+  "answer": "NER finds names of people, places, companies and dates in text."
+ },
+ {
+  "category": "NER",
+  "question": "What is an entity?",
+  "answer": "An entity is a real thing in text, like \"Kigali\" or \"Anthropic\"."
+ },
+ {
+  "category": "NER",
+  "question": "What are common entity types?",
+  "answer": "PERSON, ORGANIZATION, LOCATION, DATE and MONEY."
+ },
+ {
+  "category": "NER",
+  "question": "Give an example of NER.",
+  "answer": "In \"Ann visited Kigali\", Ann is a PERSON and Kigali is a LOCATION."
+ },
+ {
+  "category": "NER",
+  "question": "Which tool is good for NER?",
+  "answer": "spaCy has a fast, ready NER model that is easy to use."
+ },
+ {
+  "category": "NER",
+  "question": "What is spaCy?",
+  "answer": "spaCy is a Python library for fast and practical NLP."
+ },
+ {
+  "category": "NER",
+  "question": "What is POS tagging?",
+  "answer": "POS tagging labels each word as a noun, verb, adjective and so on."
+ },
+ {
+  "category": "NER",
+  "question": "What is a parser?",
+  "answer": "A parser finds how words in a sentence are connected (grammar)."
+ },
+ {
+  "category": "NER",
+  "question": "Why is NER useful?",
+  "answer": "It pulls out key facts from news, emails and documents automatically."
+ },
+ {
+  "category": "NER",
+  "question": "What is entity linking?",
+  "answer": "It connects a name in text to the correct real-world item, like \"Paris\" the city."
+ },
+ {
+  "category": "Translation",
+  "question": "What is machine translation?",
+  "answer": "It automatically translates text from one language into another."
+ },
+ {
+  "category": "Translation",
+  "question": "How does modern translation work?",
+  "answer": "Neural networks learn from millions of sentence pairs in two languages."
+ },
+ {
+  "category": "Translation",
+  "question": "What is a Transformer?",
+  "answer": "A Transformer is a neural network that looks at all words at once. It powers modern NLP."
+ },
+ {
+  "category": "Translation",
+  "question": "What is attention?",
+  "answer": "Attention lets the model focus on the most important words when it reads."
+ },
+ {
+  "category": "Translation",
+  "question": "What is Kinyarwanda?",
+  "answer": "Kinyarwanda is the national language of Rwanda, spoken by millions of people."
+ },
+ {
+  "category": "Translation",
+  "question": "Why is Kinyarwanda hard for NLP?",
+  "answer": "It has little digital data and long, complex words made of many parts."
+ },
+ {
+  "category": "Translation",
+  "question": "What is a low-resource language?",
+  "answer": "A language with very little text data available to train models."
+ },
+ {
+  "category": "Translation",
+  "question": "What is BLEU?",
+  "answer": "BLEU is a score that compares a machine translation with a human translation."
+ },
+ {
+  "category": "Translation",
+  "question": "What is multilingual NLP?",
+  "answer": "NLP that works with many languages, sometimes in one model."
+ },
+ {
+  "category": "Translation",
+  "question": "Can I ask this chatbot in Kinyarwanda?",
+  "answer": "Yes, choose Kinyarwanda and speak or type. It understands key words and can translate answers."
+ },
+ {
+  "category": "Tools",
+  "question": "Which Python libraries are used in NLP?",
+  "answer": "Common ones are NLTK, scikit-learn, spaCy and Hugging Face."
+ },
+ {
+  "category": "Tools",
+  "question": "What is NLTK?",
+  "answer": "NLTK is a Python toolkit great for learning NLP: tokenizing, stopwords, stemming."
+ },
+ {
+  "category": "Tools",
+  "question": "What is scikit-learn?",
+  "answer": "A Python library for machine learning. It has TfidfVectorizer and many classifiers."
+ },
+ {
+  "category": "Tools",
+  "question": "What is Hugging Face?",
+  "answer": "A platform with thousands of ready models and datasets for NLP."
+ },
+ {
+  "category": "Tools",
+  "question": "What is TfidfVectorizer?",
+  "answer": "A scikit-learn class that turns a list of texts into TF-IDF numbers."
+ },
+ {
+  "category": "Tools",
+  "question": "What is Kaggle?",
+  "answer": "Kaggle is a website with free datasets and data science notebooks."
+ },
+ {
+  "category": "Tools",
+  "question": "What is a Jupyter notebook?",
+  "answer": "A notebook mixes code, results and notes in one page. It is great for projects."
+ },
+ {
+  "category": "Tools",
+  "question": "What is pandas?",
+  "answer": "A Python library to read and handle tables of data, like CSV files."
+ },
+ {
+  "category": "Tools",
+  "question": "What is a pre-trained model?",
+  "answer": "A model already trained on big data that you can use or fine-tune."
+ },
+ {
+  "category": "Tools",
+  "question": "What is fine-tuning?",
+  "answer": "Training a pre-trained model a little more on your own data."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is accuracy?",
+  "answer": "Accuracy is the percentage of answers the model got right."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is precision?",
+  "answer": "Of everything the model marked as positive, how much was really positive."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is recall?",
+  "answer": "Of all real positives, how many the model found."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is the F1 score?",
+  "answer": "F1 combines precision and recall into one balanced number."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is a confusion matrix?",
+  "answer": "A table that shows correct and wrong predictions for each class."
+ },
+ {
+  "category": "Evaluation",
+  "question": "How do we test this chatbot?",
+  "answer": "We ask reworded questions and check if the right answer comes back (top-1 accuracy)."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is top-3 accuracy?",
+  "answer": "The correct answer is inside the bot's three best matches."
+ },
+ {
+  "category": "Evaluation",
+  "question": "How can I make the chatbot smarter?",
+  "answer": "Add more Q&A, add synonyms, use bigrams, or try embeddings."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What are the limits of TF-IDF?",
+  "answer": "It matches words, not meaning, so different words with the same meaning can be missed."
+ },
+ {
+  "category": "Evaluation",
+  "question": "What is the next step after TF-IDF?",
+  "answer": "Use sentence embeddings or a Transformer to understand meaning better."
+ }
+]

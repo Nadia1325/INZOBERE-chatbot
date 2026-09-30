@@ -1,0 +1,40 @@
+what does NLP stand for and do|What is NLP?
+where do voice assistants and spam filters get their language skills|Why is NLP useful?
+a big set of texts used for training|What is a corpus?
+how do you break a sentence into words|What is tokenization?
+list of every distinct word in my data|What is vocabulary?
+computers learning from examples not hard rules|What is machine learning?
+why should I tidy up my text before modeling|Why do we clean text?
+making everything small letters|What is lowercasing?
+words like the and is that add nothing|What are stopwords?
+reducing running and runs to run|What is stemming?
+turning better into good using a dictionary|What is lemmatization?
+counting word occurrences without caring about order|What is Bag of Words?
+how much a word is repeated in one text|What is TF?
+weight that favors rare terms across the collection|What is IDF?
+how do we compare two text vectors by angle|What is cosine similarity?
+two words in a row|What is an n-gram?
+dense numbers where similar meanings sit close|What is a word embedding?
+program that chats with users|What is a chatbot?
+what does the bot do when its match is weak|What happens when the bot is not sure?
+minimum score before the bot replies|What is a confidence threshold?
+how do I know if a review is happy or angry|What is sentiment analysis?
+dictionary that assigns scores to words like good|What is a lexicon?
+why is irony difficult for models|Why is sarcasm hard?
+sorting messages into categories such as junk or normal|What is text classification?
+learning from data that has answers attached|What is supervised learning?
+model memorises training data and fails on new data|What is overfitting?
+chain cleaning, vectorizing and classifier in one object|What is a pipeline?
+how can a program find people and places in a sentence|What is Named Entity Recognition?
+marking each word as noun or verb|What is POS tagging?
+library for fast industrial-strength NLP in Python|What is spaCy?
+automatically converting English to French|What is machine translation?
+model that reads all words simultaneously and powers modern NLP|What is a Transformer?
+why does Kinyarwanda have so few NLP resources|Why is Kinyarwanda hard for NLP?
+score comparing machine translation against a human reference|What is BLEU?
+which website offers free datasets for data science|What is Kaggle?
+a model that was already trained on huge data|What is a pre-trained model?
+share of predictions that were correct|What is accuracy?
+grid showing right and wrong predictions per class|What is a confusion matrix?
+how to improve this bot's intelligence|How can I make the chatbot smarter?
+where does TF-IDF fall short|What are the limits of TF-IDF?

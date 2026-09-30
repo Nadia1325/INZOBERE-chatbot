@@ -1,0 +1,22 @@
+test_question,expected_question
+What does NLP allow computers to do with human language?,What is NLP?
+Which tools can understand spoken commands or translate between languages?,Why is NLP useful?
+What name is given to a large collection of text used to train a language system?,What is a corpus?
+How can I split a sentence into individual pieces that a computer can process?,What is tokenization?
+Why does a chatbot ignore very common words such as the and is?,What is a stop word?
+How does a sentence get reduced to a rough root like run?,What is stemming?
+Why should a text system treat GOOD and good as the same word?,Why lowercase text?
+What text representation counts terms but ignores their order?,What is bag of words?
+How does TF-IDF decide which terms are important in a document?,What is TF-IDF?
+How can a system measure whether two text vectors point in a similar direction?,What is cosine similarity?
+What kind of vector puts words with related meanings near one another?,What is a word embedding?
+How does Word2Vec learn where words belong in a vector space?,What is Word2Vec?
+Which architecture uses attention to process language?,What is a transformer?
+What does a sentiment classifier identify in a piece of text?,What is sentiment analysis?
+How can software label a message as spam or legitimate?,What is spam detection?
+What NLP task finds the names of people and places in text?,What is named entity recognition?
+How can a computer turn a sentence from one language into another?,What is machine translation?
+What metric compares a machine translation with a human reference?,What is BLEU?
+What can a language model do with the next token in a sequence?,What is a language model?
+What do we call reusing a model that was trained on a large corpus?,What is transfer learning?
+How does a FAQ bot select a stored response without writing a new one?,What is a retrieval-based chatbot?

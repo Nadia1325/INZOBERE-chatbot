@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Inzobere — NLP Assistant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#14213d;--mute:#5b6b86;--line:#dbe3f0;--blue:#1b4f9c;--teal:#12857a;--user:#1b4f9c;--userink:#fff;--bot:#eaf1fb;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1524;--card:#16203a;--ink:#e8eefb;--mute:#93a3c4;--line:#27345a;--blue:#6ea2f5;--teal:#3cc5b6;--user:#2f63bd;--userink:#fff;--bot:#1d2b4d}}
+:root[data-theme="dark"]{--bg:#0e1524;--card:#16203a;--ink:#e8eefb;--mute:#93a3c4;--line:#27345a;--blue:#6ea2f5;--teal:#3cc5b6;--user:#2f63bd;--userink:#fff;--bot:#1d2b4d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:16px;display:grid;grid-template-columns:1fr;gap:16px}
+.side{display:none}
+header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:24px;color:var(--blue)}
+.sub{margin:2px 0 0;color:var(--mute);font-size:14px}
+.tools{display:flex;gap:8px;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;color:var(--mute);padding:7px 12px;cursor:pointer;font:inherit}
+.seg button.on{background:var(--blue);color:#fff}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-height:0}
+.chat{height:calc(100vh - 125px);min-height:460px}
+#log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:82%;padding:10px 14px;border-radius:14px;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--user);color:var(--userink);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:4px}
+.meta{margin-top:8px;font-size:12px;color:var(--mute);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.meta a,.meta button{color:var(--teal);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline}
+.trans{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+.chip:hover,.qbtn:hover{border-color:var(--teal)}
+form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+input[type=text],input[type=search],select{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:inherit;cursor:pointer;background:var(--blue);color:#fff}
+.btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+.btn.rec{background:#c0392b;color:#fff}
+.side{height:calc(100vh - 150px);min-height:460px}
+.side h2{margin:0;font-size:16px;padding:14px 14px 8px}
+.ctl{display:flex;gap:8px;padding:0 14px 10px}
+#list{overflow-y:auto;padding:0 14px 14px}
+details{border-top:1px solid var(--line);padding:6px 0}
+summary{cursor:pointer;font-weight:600;padding:4px 0}
+summary span{color:var(--mute);font-weight:400;font-size:12px}
+.qbtn{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:8px;color:var(--ink);padding:5px 8px;font:inherit;font-size:13.5px;cursor:pointer}
+.note{color:var(--mute);font-size:12px;padding:0 16px 10px}
+
+.speak{margin-top:8px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:transparent;color:var(--teal);border-radius:8px;padding:5px 9px;font:inherit;font-size:12px;cursor:pointer}
+.speak:hover{border-color:var(--teal);background:var(--bg)}
+.speak.active{background:var(--teal);color:#fff}
+@media(max-width:860px){.wrap{grid-template-columns:1fr}.chat,.side{height:auto}#log{height:60vh}.side{max-height:520px}.msg{max-width:92%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1 id="t-title">Inzobere</h1><p class="sub" id="t-sub">Your professional NLP assistant. Ask by typing or speaking.</p></div>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Language"><button id="lang-en" class="on">English</button><button id="lang-rw">Kinyarwanda</button></div>
+    <button class="btn ghost" id="clear">Clear</button>
+  </div>
+</header>
+
+<section class="panel chat" aria-label="Chat">
+  <div id="log" aria-live="polite"></div>
+  <form id="form">
+    <input type="text" id="q" autocomplete="off" placeholder="Type your question…" aria-label="Your question">
+    <button type="button" class="btn ghost" id="mic" title="Ask with your voice">🎤 Voice</button>
+    <button class="btn" id="send">Ask</button>
+  </form>
+</section>
+
+</div>
+
+<script>
+const FAQ = [{"category": "Basics", "question": "What is NLP?", "answer": "NLP (Natural Language Processing) teaches computers to read, understand and write human language."}, {"category": "Basics", "question": "Why is NLP useful?", "answer": "It powers chatbots, search, spam filters, translators and voice assistants."}, {"category": "Basics", "question": "What is a corpus?", "answer": "A corpus is a big collection of text used to train or test a model."}, {"category": "Basics", "question": "What is a token?", "answer": "A token is a small piece of text, usually a word or part of a word."}, {"category": "Basics", "question": "What is tokenization?", "answer": "Tokenization splits a sentence into tokens, for example \"I love NLP\" becomes I, love, NLP."}, {"category": "Basics", "question": "What is a document in NLP?", "answer": "A document is one piece of text, like a review, a tweet or an SMS."}, {"category": "Basics", "question": "What is vocabulary?", "answer": "Vocabulary is the list of all unique words found in your dataset."}, {"category": "Basics", "question": "What is a dataset?", "answer": "A dataset is the collection of examples we use to build and check a model."}, {"category": "Basics", "question": "What is a model?", "answer": "A model is a program that learned patterns from data and can make predictions."}, {"category": "Basics", "question": "What is machine learning?", "answer": "Machine learning lets computers learn patterns from examples instead of fixed rules."}, {"category": "Cleaning", "question": "Why do we clean text?", "answer": "Clean text removes noise, so the model focuses on the words that matter."}, {"category": "Cleaning", "question": "What is lowercasing?", "answer": "It changes all letters to small letters so \"Good\" and \"good\" are the same word."}, {"category": "Cleaning", "question": "What are stopwords?", "answer": "Stopwords are very common words like \"the\", \"is\" and \"a\" that carry little meaning."}, {"category": "Cleaning", "question": "Why remove stopwords?", "answer": "Removing them keeps the important words and makes the model faster."}, {"category": "Cleaning", "question": "What is stemming?", "answer": "Stemming cuts words to a rough root, like \"running\" to \"run\"."}, {"category": "Cleaning", "question": "What is lemmatization?", "answer": "Lemmatization changes a word to its real dictionary form, like \"better\" to \"good\"."}, {"category": "Cleaning", "question": "Stemming or lemmatization, which is better?", "answer": "Lemmatization is more accurate, but stemming is faster and simpler."}, {"category": "Cleaning", "question": "Why remove punctuation?", "answer": "Punctuation usually adds noise in simple models, so we remove it."}, {"category": "Cleaning", "question": "What is text normalization?", "answer": "It means making text consistent: lowercase, no extra spaces, no strange symbols."}, {"category": "Cleaning", "question": "What is a regular expression?", "answer": "A regular expression (regex) is a pattern used to find or replace text."}, {"category": "Features", "question": "What is Bag of Words?", "answer": "Bag of Words counts how many times each word appears, ignoring word order."}, {"category": "Features", "question": "What is TF?", "answer": "TF (term frequency) is how often a word appears in one document."}, {"category": "Features", "question": "What is IDF?", "answer": "IDF (inverse document frequency) gives a higher score to rare words across all documents."}, {"category": "Features", "question": "What is TF-IDF?", "answer": "TF-IDF multiplies TF by IDF, so important and rare words get bigger scores."}, {"category": "Features", "question": "Why is TF-IDF better than simple counts?", "answer": "It reduces the weight of common words and highlights the special words."}, {"category": "Features", "question": "What is a vector?", "answer": "A vector is a list of numbers that represents a text."}, {"category": "Features", "question": "What is cosine similarity?", "answer": "Cosine similarity measures how close two vectors are, from 0 (different) to 1 (same)."}, {"category": "Features", "question": "What is an n-gram?", "answer": "An n-gram is a group of n words in a row, like \"machine learning\" (2-gram)."}, {"category": "Features", "question": "What is a word embedding?", "answer": "An embedding is a smart vector where words with similar meaning are close together."}, {"category": "Features", "question": "What is Word2Vec?", "answer": "Word2Vec is a method that learns word embeddings from large text."}, {"category": "Chatbot", "question": "What is a chatbot?", "answer": "A chatbot is a program that talks with people using text or voice."}, {"category": "Chatbot", "question": "What is an FAQ chatbot?", "answer": "It answers common questions by finding the closest stored question and returning its answer."}, {"category": "Chatbot", "question": "How does this chatbot work?", "answer": "It turns your question into TF-IDF numbers and finds the most similar stored question."}, {"category": "Chatbot", "question": "What are the steps of this chatbot?", "answer": "Clean the text, apply TF-IDF, compare with cosine similarity, then return the best answer."}, {"category": "Chatbot", "question": "What is a similarity score?", "answer": "It is a number showing how well your question matches a stored question."}, {"category": "Chatbot", "question": "What is a confidence threshold?", "answer": "It is the minimum score needed to answer, so the bot does not guess when unsure."}, {"category": "Chatbot", "question": "What happens when the bot is not sure?", "answer": "It says it did not understand and suggests similar questions."}, {"category": "Chatbot", "question": "What is a rule-based chatbot?", "answer": "It follows fixed rules written by a person, like if-then statements."}, {"category": "Chatbot", "question": "What is an AI chatbot?", "answer": "It uses machine learning to understand questions instead of only fixed rules."}, {"category": "Chatbot", "question": "What is a retrieval chatbot?", "answer": "A retrieval chatbot picks an answer from a ready list instead of writing a new one."}, {"category": "Sentiment", "question": "What is sentiment analysis?", "answer": "It finds whether a text is positive, negative or neutral."}, {"category": "Sentiment", "question": "Where is sentiment analysis used?", "answer": "Companies use it on reviews, tweets and feedback to see how people feel."}, {"category": "Sentiment", "question": "What are the sentiment labels?", "answer": "Usually positive, negative and neutral."}, {"category": "Sentiment", "question": "What is a lexicon?", "answer": "A lexicon is a dictionary of words with scores, like \"good\" is positive."}, {"category": "Sentiment", "question": "What is VADER?", "answer": "VADER is a ready NLTK tool that scores the sentiment of short social media text."}, {"category": "Sentiment", "question": "What is polarity?", "answer": "Polarity is the sentiment score, from -1 (very negative) to +1 (very positive)."}, {"category": "Sentiment", "question": "Why is sarcasm hard?", "answer": "Sarcasm says the opposite of what it means, so simple models get confused."}, {"category": "Sentiment", "question": "What is a movie review dataset?", "answer": "It is a set of reviews labeled positive or negative, often used to train sentiment models."}, {"category": "Sentiment", "question": "What is negation?", "answer": "Negation words like \"not\" flip the meaning, for example \"not good\"."}, {"category": "Sentiment", "question": "What is emotion detection?", "answer": "It finds feelings like joy, anger or sadness, not just positive or negative."}, {"category": "Classification", "question": "What is text classification?", "answer": "It puts a text into a group, like spam or not spam."}, {"category": "Classification", "question": "What is spam detection?", "answer": "It is a classification task that finds unwanted messages such as spam SMS."}, {"category": "Classification", "question": "What is a label?", "answer": "A label is the correct answer for an example, like \"spam\"."}, {"category": "Classification", "question": "What is supervised learning?", "answer": "The model learns from examples that already have labels."}, {"category": "Classification", "question": "What is Naive Bayes?", "answer": "A fast, simple classifier that uses word probabilities. It works well for text."}, {"category": "Classification", "question": "What is Logistic Regression?", "answer": "A simple, strong classifier that gives a probability for each class."}, {"category": "Classification", "question": "What is SVM?", "answer": "SVM (Support Vector Machine) finds the best line that separates classes."}, {"category": "Classification", "question": "What is a train-test split?", "answer": "We split data into training (to learn) and testing (to check) parts."}, {"category": "Classification", "question": "What is overfitting?", "answer": "Overfitting means the model memorized the training data and fails on new data."}, {"category": "Classification", "question": "What is a pipeline?", "answer": "A pipeline chains steps, like cleaning, TF-IDF and the model, into one flow."}, {"category": "NER", "question": "What is Named Entity Recognition?", "answer": "NER finds names of people, places, companies and dates in text."}, {"category": "NER", "question": "What is an entity?", "answer": "An entity is a real thing in text, like \"Kigali\" or \"Anthropic\"."}, {"category": "NER", "question": "What are common entity types?", "answer": "PERSON, ORGANIZATION, LOCATION, DATE and MONEY."}, {"category": "NER", "question": "Give an example of NER.", "answer": "In \"Ann visited Kigali\", Ann is a PERSON and Kigali is a LOCATION."}, {"category": "NER", "question": "Which tool is good for NER?", "answer": "spaCy has a fast, ready NER model that is easy to use."}, {"category": "NER", "question": "What is spaCy?", "answer": "spaCy is a Python library for fast and practical NLP."}, {"category": "NER", "question": "What is POS tagging?", "answer": "POS tagging labels each word as a noun, verb, adjective and so on."}, {"category": "NER", "question": "What is a parser?", "answer": "A parser finds how words in a sentence are connected (grammar)."}, {"category": "NER", "question": "Why is NER useful?", "answer": "It pulls out key facts from news, emails and documents automatically."}, {"category": "NER", "question": "What is entity linking?", "answer": "It connects a name in text to the correct real-world item, like \"Paris\" the city."}, {"category": "Translation", "question": "What is machine translation?", "answer": "It automatically translates text from one language into another."}, {"category": "Translation", "question": "How does modern translation work?", "answer": "Neural networks learn from millions of sentence pairs in two languages."}, {"category": "Translation", "question": "What is a Transformer?", "answer": "A Transformer is a neural network that looks at all words at once. It powers modern NLP."}, {"category": "Translation", "question": "What is attention?", "answer": "Attention lets the model focus on the most important words when it reads."}, {"category": "Translation", "question": "What is Kinyarwanda?", "answer": "Kinyarwanda is the national language of Rwanda, spoken by millions of people."}, {"category": "Translation", "question": "Why is Kinyarwanda hard for NLP?", "answer": "It has little digital data and long, complex words made of many parts."}, {"category": "Translation", "question": "What is a low-resource language?", "answer": "A language with very little text data available to train models."}, {"category": "Translation", "question": "What is BLEU?", "answer": "BLEU is a score that compares a machine translation with a human translation."}, {"category": "Translation", "question": "What is multilingual NLP?", "answer": "NLP that works with many languages, sometimes in one model."}, {"category": "Translation", "question": "Can I ask this chatbot in Kinyarwanda?", "answer": "Yes, choose Kinyarwanda and speak or type. It understands key words and can translate answers."}, {"category": "Tools", "question": "Which Python libraries are used in NLP?", "answer": "Common ones are NLTK, scikit-learn, spaCy and Hugging Face."}, {"category": "Tools", "question": "What is NLTK?", "answer": "NLTK is a Python toolkit great for learning NLP: tokenizing, stopwords, stemming."}, {"category": "Tools", "question": "What is scikit-learn?", "answer": "A Python library for machine learning. It has TfidfVectorizer and many classifiers."}, {"category": "Tools", "question": "What is Hugging Face?", "answer": "A platform with thousands of ready models and datasets for NLP."}, {"category": "Tools", "question": "What is TfidfVectorizer?", "answer": "A scikit-learn class that turns a list of texts into TF-IDF numbers."}, {"category": "Tools", "question": "What is Kaggle?", "answer": "Kaggle is a website with free datasets and data science notebooks."}, {"category": "Tools", "question": "What is a Jupyter notebook?", "answer": "A notebook mixes code, results and notes in one page. It is great for projects."}, {"category": "Tools", "question": "What is pandas?", "answer": "A Python library to read and handle tables of data, like CSV files."}, {"category": "Tools", "question": "What is a pre-trained model?", "answer": "A model already trained on big data that you can use or fine-tune."}, {"category": "Tools", "question": "What is fine-tuning?", "answer": "Training a pre-trained model a little more on your own data."}, {"category": "Evaluation", "question": "What is accuracy?", "answer": "Accuracy is the percentage of answers the model got right."}, {"category": "Evaluation", "question": "What is precision?", "answer": "Of everything the model marked as positive, how much was really positive."}, {"category": "Evaluation", "question": "What is recall?", "answer": "Of all real positives, how many the model found."}, {"category": "Evaluation", "question": "What is the F1 score?", "answer": "F1 combines precision and recall into one balanced number."}, {"category": "Evaluation", "question": "What is a confusion matrix?", "answer": "A table that shows correct and wrong predictions for each class."}, {"category": "Evaluation", "question": "How do we test this chatbot?", "answer": "We ask reworded questions and check if the right answer comes back (top-1 accuracy)."}, {"category": "Evaluation", "question": "What is top-3 accuracy?", "answer": "The correct answer is inside the bot's three best matches."}, {"category": "Evaluation", "question": "How can I make the chatbot smarter?", "answer": "Add more Q&A, add synonyms, use bigrams, or try embeddings."}, {"category": "Evaluation", "question": "What are the limits of TF-IDF?", "answer": "It matches words, not meaning, so different words with the same meaning can be missed."}, {"category": "Evaluation", "question": "What is the next step after TF-IDF?", "answer": "Use sentence embeddings or a Transformer to understand meaning better."}];
+const $ = id => document.getElementById(id);
+
+/* ---------- 1. Clean text (same steps as chatbot.py) ---------- */
+const STOP = new Set("a about above after again all am an and any are as at be because been before being below between both but by can could did do does doing down during each few for from further had has have having he her here hers him his how i if in into is it its just me more most my no nor not of off on once only or other our out over own same she should so some such than that the their them then there these they this those through to too under until up very was we were what when where which while who whom why will with would you your".split(" "));
+function stem(w){for(const e of["ing","ed","es","s"]){if(w.length>4&&w.endsWith(e)&&!w.endsWith("ss"))return w.slice(0,-e.length)}return w}
+const SYN={bot:"chatbot",correctness:"accuracy",common:"stopwords",computer:"machine",translate:"translation",review:"review sentiment",reviews:"review sentiment"};
+function clean(t){return t.toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).map(w=>SYN[w]||w).join(" ").split(/\s+/).filter(w=>w&&w.length>1&&!STOP.has(w)).map(stem)}
+function terms(t){const w=clean(t),o=[...w];for(let i=0;i<w.length-1;i++)o.push(w[i]+" "+w[i+1]);return o}
+
+/* ---------- 2. TF-IDF + cosine similarity ---------- */
+const docs = FAQ.map(f=>terms(f.question+" "+f.question+" "+f.answer));
+const df = {}; docs.forEach(d=>new Set(d).forEach(t=>df[t]=(df[t]||0)+1));
+const N = docs.length, idf = {}; for(const t in df) idf[t]=Math.log((1+N)/(1+df[t]))+1;
+function vec(list){const c={};list.forEach(t=>{if(idf[t])c[t]=(c[t]||0)+1});let n=0;for(const t in c){c[t]*=idf[t];n+=c[t]*c[t]}n=Math.sqrt(n)||1;for(const t in c)c[t]/=n;return c}
+const M = docs.map(vec);
+function ask(text){const v=vec(terms(text));return M.map((m,i)=>{let s=0;for(const t in v)if(m[t])s+=v[t]*m[t];return[i,s]}).sort((a,b)=>b[1]-a[1]).slice(0,3)}
+
+/* ---------- 3. Kinyarwanda helper: map key words to English ---------- */
+const PHRASES = [["kwiga imashini","machine learning"],["ubwenge bw ubukorano","artificial intelligence"],["gusesengura amarangamutima","sentiment analysis"],["amazina yihariye","named entity"]];
+const RW = {niki:"what",iki:"what",ese:"what",ikihe:"which",gute:"how",kuki:"why",ryari:"when",hehe:"where",nde:"who",
+amagambo:"words",ijambo:"word",inyandiko:"text",imyandiko:"text",ururimi:"language",indimi:"languages",ikinyarwanda:"kinyarwanda",
+ubusobanuro:"translation",guhindura:"translate",gusobanura:"translate",ibibazo:"questions",ikibazo:"question",igisubizo:"answer",
+gusuzuma:"analysis",amarangamutima:"sentiment",ibitekerezo:"reviews sentiment",gukuraho:"remove",gusukura:"clean",guhuza:"match",
+amazina:"names",umuntu:"person",ahantu:"location",itariki:"date",amakuru:"data dataset",imibare:"vector numbers",ibisobanuro:"meaning",
+ntabwo:"not",ikora:"work",gukora:"work",gukoresha:"use",akamaro:"useful",ibikoresho:"tools",isomero:"library",urugero:"example",
+imashini:"machine",mudasobwa:"computer",ubwenge:"smart",ubukorano:"artificial",gutahura:"detect",gupima:"measure",ukuri:"accuracy",
+inshuro:"frequency",ijambo_rimwe:"token",igice:"part",ikiganiro:"chat",umufasha:"chatbot",kumenya:"recognition",ibyiciro:"classification",
+gutandukanya:"classification",ubutumwa:"messages spam",kwigisha:"train",ikitegererezo:"model"};
+function rwToEn(t){let s=t.toLowerCase().replace(/['’]/g," ");PHRASES.forEach(([a,b])=>s=s.replace(a,b));
+  return s.split(/[^a-z0-9]+/).map(w=>RW[w]||w).join(" ")}
+
+/* ---------- 4. Chat screen ---------- */
+let lang="en";
+const TXT={en:{title:"NLP FAQ Chatbot",sub:"Your professional NLP assistant. Ask by typing or speaking.",ph:"Type your question…",browse:"Browse all 100 questions",hello:"Hello! Ask me anything about NLP, You can also use the 🎤 button to speak, or open “Questions” to see what I know.",unsure:"I am not sure I understood. Did you mean one of these?",tr:"Translate to Kinyarwanda",clear:"Clear",send:"Ask",lis:"Listening…",nomic:"Voice is not available here. Please open the page in Chrome."},
+rw:{title:"NLP FAQ Chatbot",sub:"Umufasha w'ubwenge ku NLP. Baza wandika cyangwa uvuga.",ph:"Andika ikibazo cyawe…",browse:"Reba ibibazo byose 100",hello:"Muraho! Mbaza icyo ushaka cyose ku NLP, Ushobora no gukoresha 🎤 ukavuga, cyangwa ugafungura “Ibibazo” ukareba ibyo nzi.",unsure:"Simbyumvise neza. Ese wari ushaka kimwe muri ibi?",tr:"Hindura mu Kinyarwanda",clear:"Siba",send:"Baza",lis:"Ndumva…",nomic:"Ijwi ntirikora hano. Fungura iyi paji muri Chrome."}};
+const T=()=>TXT[lang];
+function add(cls,html){const d=document.createElement("div");d.className="msg "+cls;d.innerHTML=html;$("log").appendChild(d);$("log").scrollTop=1e9;return d}
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function translateRW(text){
+  try{if("Translator" in self){const o={sourceLanguage:"en",targetLanguage:"rw"};
+    if((await Translator.availability(o))!=="unavailable"){return await (await Translator.create(o)).translate(text)}}}catch(e){}
+  return null}
+function gtLink(text){return "https://translate.google.com/?sl=en&tl=rw&op=translate&text="+encodeURIComponent(text)}
+
+function chips(list){return '<div class="chips">'+list.map(i=>`<button class="chip" data-i="${i}">${esc(FAQ[i].question)}</button>`).join("")+"</div>"}
+
+function speakAnswer(text, button){
+  if(!("speechSynthesis" in window)){
+    if(button) button.textContent="🔊 Not supported";
+    return;
+  }
+  window.speechSynthesis.cancel();
+  document.querySelectorAll(".speak.active").forEach(b=>{
+    b.classList.remove("active");
+    b.textContent="🔊 Read answer";
+  });
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang==="rw"?"rw-RW":"en-US";
+  u.rate=0.95;
+  u.pitch=1;
+  if(button){
+    button.classList.add("active");
+    button.textContent="⏹ Stop";
+    u.onend=()=>{button.classList.remove("active");button.textContent="🔊 Read answer"};
+    u.onerror=()=>{button.classList.remove("active");button.textContent="🔊 Read answer"};
+  }
+  window.speechSynthesis.speak(u);
+}
+
+function addAnswerMessage(answerText, autoSpeak=false){
+  const m=add("bot", `${esc(answerText)}<button class="speak" type="button" aria-label="Read answer aloud">🔊 Read answer</button>`);
+  const button=m.querySelector(".speak");
+  button.onclick=()=>{
+    if(button.classList.contains("active")){
+      window.speechSynthesis.cancel();
+      button.classList.remove("active");
+      button.textContent="🔊 Read answer";
+    }else{
+      speakAnswer(answerText,button);
+    }
+  };
+  if(autoSpeak) speakAnswer(answerText,button);
+  return m;
+}
+
+function answer(raw, fromVoice=false){
+  const text=raw.trim(); if(!text)return;
+  add("user",esc(text));
+  const query = lang==="rw" ? rwToEn(text) : text;
+  if(/^(hi|hello|hey|muraho|mwiriwe|amakuru)/i.test(text)){
+    addAnswerMessage(T().hello, fromVoice);
+    return;
+  }
+  if(/^(thanks|thank you|murakoze|bye)/i.test(text)){
+    addAnswerMessage(lang==="rw"?"Murakoze cyane! 😊":"You are welcome! 😊", fromVoice);
+    return;
+  }
+  const top=ask(query),[i,s]=top[0];
+  if(s<0.2){
+    addAnswerMessage(T().unsure, fromVoice);
+    return;
+  }
+  const f=FAQ[i];
+  addAnswerMessage(f.answer, fromVoice);
+}
+$("form").onsubmit=e=>{e.preventDefault();const v=$("q").value;$("q").value="";answer(v)};
+$("log").onclick=e=>{const c=e.target.closest(".chip");if(c)answer(FAQ[c.dataset.i].question)};
+
+/* ---------- 5. Voice input (Chrome speech recognition) ---------- */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
+$("mic").onclick=()=>{
+  if(!SR){add("bot",T().nomic);return}
+  if(rec){rec.stop();return}
+  rec=new SR();rec.lang=lang==="rw"?"rw-RW":"en-US";rec.interimResults=false;
+  $("mic").classList.add("rec");$("mic").textContent="⏺ "+T().lis;
+  rec.onresult=e=>{const v=e.results[0][0].transcript;$("q").value=v;answer(v,true);$("q").value=""};
+  rec.onerror=()=>addAnswerMessage(T().nomic,false);
+  rec.onend=()=>{rec=null;$("mic").classList.remove("rec");$("mic").textContent="🎤 Voice"};
+  rec.start()};
+
+/* ---------- Language switch ---------- */
+function setLang(l){lang=l;$("lang-en").classList.toggle("on",l==="en");$("lang-rw").classList.toggle("on",l==="rw");
+  document.documentElement.lang=l==="rw"?"rw":"en";const t=T();
+  $("t-sub").textContent=t.sub;$("q").placeholder=t.ph;$("clear").textContent=t.clear;$("send").textContent=t.send}
+$("lang-en").onclick=()=>setLang("en");$("lang-rw").onclick=()=>setLang("rw");
+$("clear").onclick=()=>{window.speechSynthesis?.cancel();$("log").innerHTML="";addAnswerMessage(T().hello,false)};
+addAnswerMessage(T().hello,false);
+</script>
+</body>
+</html>

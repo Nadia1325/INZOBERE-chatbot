@@ -1,0 +1,7 @@
+test_set,model,top1,top3,mrr
+New test set (40 reworded questions),v1 TF-IDF,0.575,0.700,0.676
+New test set (40 reworded questions),v2 Embeddings only,0.400,0.550,0.511
+New test set (40 reworded questions),v2 Hybrid (TF-IDF + embeddings),0.600,0.825,0.731
+Old test set (10 questions from v1),v1 TF-IDF,0.900,1.000,0.933
+Old test set (10 questions from v1),v2 Embeddings only,0.600,0.800,0.701
+Old test set (10 questions from v1),v2 Hybrid (TF-IDF + embeddings),0.900,1.000,0.933
