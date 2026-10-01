@@ -3,3 +3,4 @@ numpy
 gensim>=4.4.0
 matplotlib
 streamlit
+SpeechRecognition
