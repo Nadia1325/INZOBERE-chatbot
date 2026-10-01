@@ -1,6 +1,7 @@
 """Streamlit entry point for the Inzobere FAQ assistant."""
 
 import json
+import sys
 from functools import lru_cache
 from pathlib import Path
 
@@ -117,10 +118,14 @@ st.title("🤖 Inzobere")
 st.caption("Your bilingual NLP question and answer assistant")
 language = st.radio("Language / Ururimi", ("English", "Kinyarwanda"), horizontal=True)
 if language == "English":
+    hybrid_available = sys.version_info < (3, 14)
+    modes = ("tfidf", "hybrid") if hybrid_available else ("tfidf",)
     mode = st.selectbox(
-        "Search model", ("tfidf", "hybrid"),
+        "Search model", modes,
         format_func=lambda value: "TF-IDF baseline" if value == "tfidf" else "Hybrid: TF-IDF + GloVe",
     )
+    if not hybrid_available:
+        st.caption("Hybrid search requires GloVe, which is not supported by this Python version. TF-IDF is available.")
 else:
     mode = "tfidf"
 
